@@ -74,11 +74,17 @@ function randomColor() {
 
 let colorData = [];
 for (let face = 0; face < 6; face++) {
-    let faceColor = randomColor();
+    // let faceColor = [face];
     for (let vertex = 0; vertex < 6; vertex++) {
+        let altFace = face / 10;
+        let altVert = vertex / 10;
+
+        let faceColor = [altFace, altVert, 0]
+        console.error(faceColor)
         colorData.push(...faceColor);
     }
 }
+let test = [...colorData]
 
 const positionBuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
@@ -149,10 +155,57 @@ mat4.scale(matrix, matrix, [0.25, 0.25, 0.25]);
 
 function animate() {
     requestAnimationFrame(animate);
-    mat4.rotateZ(matrix, matrix, Math.PI/2 / 70);
-    mat4.rotateX(matrix, matrix, Math.PI/2 / 70);
+    // mat4.rotateZ(matrix, matrix, Math.PI/2 / 70);
+    // mat4.rotateX(matrix, matrix, Math.PI/2 / 70);
     gl.uniformMatrix4fv(uniformLocations.matrix, false, matrix);
     gl.drawArrays(gl.TRIANGLES, 0, vertexData.length / 3);
 }
+let prev = {
+    x: 0,
+    y: 0
+}
+let click;
+
+canvas.addEventListener('mousedown', e => {
+    click = true;
+});
+
+canvas.addEventListener('mouseup', e => {
+    click = false;
+});
+canvas.addEventListener('mousemove', e => {
+    if (!click) return
+    const pos = {
+        x: e.screenX - prev.x,
+        y: e.screenY - prev.y
+    }
+    // const width = canvas.width / 2;
+    // const height = canvas.height / 2
+    // const coords = {
+    //     x: e.screenX - width,
+    //     y: e.screenY - height
+    // } 
+    // console.error(pos.x)
+    mat4.rotateX(matrix, matrix, pos.x / 100)
+    mat4.rotateY(matrix, matrix, pos.y / 100)
+    prev.x = e.screenX
+    prev.y = e.screenY
+
+    // mat4.rotateZ(matrix, matrix, e.pos / 100000)
+
+    // console.error(e)
+    // if (isDrawing === true) {
+    //   drawLine(context, x, y, e.offsetX, e.offsetY);
+    //   x = e.offsetX;
+    //   y = e.offsetY;
+    // }
+});
+
+    mat4.rotateZ(matrix, matrix, 0);
+    mat4.rotateX(matrix, matrix, 10);
+    mat4.rotateY(matrix, matrix, 10);
+
+    // gl.uniformMatrix4fv(uniformLocations.matrix, false, matrix);
+    // gl.drawArrays(gl.TRIANGLES, 0, vertexData.length / 3);
 
 animate();
