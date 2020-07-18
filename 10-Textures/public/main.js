@@ -7,45 +7,45 @@ if (!gl) {
 
 const vertexData = [
 
-    // Front
-    0.5, 0.5, 0.5, // top right 
-    0.5, -.5, 0.5, // bottom right
-    -.5, 0.5, 0.5, // top left
-    -.5, 0.5, 0.5, // top left
-    0.5, -.5, 0.5, // bottom right
-    -.5, -.5, 0.5, // bottom left
+    // // Front
+    // 0.5, 0.5, 0.5, // top right 
+    // 0.5, -.5, 0.5, // bottom right
+    // -.5, 0.5, 0.5, // top left
+    // -.5, 0.5, 0.5, // top left
+    // 0.5, -.5, 0.5, // bottom right
+    // -.5, -.5, 0.5, // bottom left
 
-    // Left
-    -.5, 0.5, 0.5,
-    -.5, -.5, 0.5,
-    -.5, 0.5, -.5,
-    -.5, 0.5, -.5,
-    -.5, -.5, 0.5,
-    -.5, -.5, -.5,
+    // // Left
+    // -.5, 0.5, 0.5,
+    // -.5, -.5, 0.5,
+    // -.5, 0.5, -.5,
+    // -.5, 0.5, -.5,
+    // -.5, -.5, 0.5,
+    // -.5, -.5, -.5,
 
-    // Back
-    -.5, 0.5, -.5,
-    -.5, -.5, -.5,
-    0.5, 0.5, -.5,
-    0.5, 0.5, -.5,
-    -.5, -.5, -.5,
-    0.5, -.5, -.5,
+    // // Back
+    // -.5, 0.5, -.5,
+    // -.5, -.5, -.5,
+    // 0.5, 0.5, -.5,
+    // 0.5, 0.5, -.5,
+    // -.5, -.5, -.5,
+    // 0.5, -.5, -.5,
 
-    // Right
-    0.5, 0.5, -.5,
-    0.5, -.5, -.5,
-    0.5, 0.5, 0.5,
-    0.5, 0.5, 0.5,
-    0.5, -.5, 0.5,
-    0.5, -.5, -.5,
+    // // Right
+    // 0.5, 0.5, -.5,
+    // 0.5, -.5, -.5,
+    // 0.5, 0.5, 0.5,
+    // 0.5, 0.5, 0.5,
+    // 0.5, -.5, 0.5,
+    // 0.5, -.5, -.5,
 
-    // Top
-    0.5, 0.5, 0.5,
-    0.5, 0.5, -.5,
-    -.5, 0.5, 0.5,
-    -.5, 0.5, 0.5,
-    0.5, 0.5, -.5,
-    -.5, 0.5, -.5,
+    // // Top
+    // 0.5, 0.5, 0.5,
+    // 0.5, 0.5, -.5,
+    // -.5, 0.5, 0.5,
+    // -.5, 0.5, 0.5,
+    // 0.5, 0.5, -.5,
+    // -.5, 0.5, -.5,
 
     // Underside
     0.5, -.5, 0.5,
@@ -64,7 +64,7 @@ function repeat(n, pattern) {
     return [...Array(n)].reduce(sum => sum.concat(pattern), []);
 }
 
-const uvData = repeat(6, [
+const uvData = repeat(1, [
     1, 1, // top right
     1, 0, // bottom right
     0, 1, // top left
@@ -143,7 +143,6 @@ let uniformLocations;
     }
     `);
     gl.compileShader(fragmentShader);
-    console.log(gl.getShaderInfoLog(fragmentShader));
 
     const program = gl.createProgram();
     gl.attachShader(program, vertexShader);
@@ -198,8 +197,8 @@ mat4.invert(viewMatrix, viewMatrix);
 function animate() {
     requestAnimationFrame(animate);
 
-    mat4.rotateX(modelMatrix, modelMatrix, Math.PI/60);
-    mat4.rotateY(modelMatrix, modelMatrix, Math.PI/160);
+    mat4.rotateX(modelMatrix, modelMatrix, Math.PI/600);
+    mat4.rotateY(modelMatrix, modelMatrix, Math.PI/1600);
 
     mat4.multiply(mvMatrix, viewMatrix, modelMatrix);
     mat4.multiply(mvpMatrix, projectionMatrix, mvMatrix);
