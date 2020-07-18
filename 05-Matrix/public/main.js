@@ -78,16 +78,20 @@ const uniformLocations = {
 };
 
 const matrix = mat4.create();
+console.error(matrix);
 
 mat4.translate(matrix, matrix, [.2, .5, 0]);
 
 mat4.scale(matrix, matrix, [0.25, 0.25, 0.25]);
 
+gl.uniformMatrix4fv(uniformLocations.matrix, false, matrix); //
+gl.drawArrays(gl.TRIANGLES, 0, 3);//
+
 function animate() {
-    requestAnimationFrame(animate);
-    mat4.rotateZ(matrix, matrix, Math.PI/2 / 70);
-    gl.uniformMatrix4fv(uniformLocations.matrix, false, matrix);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // requestAnimationFrame(animate);
+    // mat4.rotateZ(matrix, matrix, Math.PI/2 / 70);
+    // gl.uniformMatrix4fv(uniformLocations.matrix, false, matrix);
+    // gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
 
-animate();
+// animate();
