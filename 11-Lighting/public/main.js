@@ -1,6 +1,8 @@
 /*
  * Title: Learn WebGL #11 - Lighting
  * Author: Darius @ InventBox <inventboxtutorial@gmail.com>
+ *
+ *RUN this by typing: python -m http.server 8000
  */
 
 const canvas = document.querySelector('canvas');
